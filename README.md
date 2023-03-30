@@ -27,8 +27,20 @@ The frontend is based on JSX. Therefore you need to have npm and node.
 cd youtube-to-post
 npm install
 npm run start
-````
+```
+### Post-Settings example
 
+Regex
+```
+(.*)Über die Werteherren
+```
+
+Template
+```
+__MATCH[0]__
+<br />
+<iframe width="640" height="430" src="https://www.youtube.com/embed/__VIDEO_ID__"></iframe>
+```
 
 
 ## Author

@@ -22,6 +22,8 @@ class YoutubeToPostPlugin {
 		add_action('wp_ajax_yttp_fetchYoutubeVideos', 'yttp_fetchYoutubeVideos' );
 		add_action('wp_ajax_yttp_options', 'yttp_options' );
 		add_option('yttpYoutubeApiKey', '');
+		add_option('yttpPostTemplate', '');
+		add_option('yttpPostRegex', '');
 		add_option('yttpYoutubeChannelId', '');
 	}
 
@@ -50,7 +52,7 @@ class YoutubeToPostPlugin {
 			'optionsUrl' => admin_url('options.php'),
 			'nonce' => wp_create_nonce('yttp-nonce'),
 			'route' => $_REQUEST['page'],
-			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'))
+			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'), 'yttpPostRegex' => get_option('yttpPostRegex'), 'yttpPostTemplate' => get_option('yttpPostTemplate'))
 		));
 	}
 

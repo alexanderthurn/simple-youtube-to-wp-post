@@ -67,6 +67,8 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
   console.log('rendering settings', settings);
   const [youtubeApiKey, setYoutubeApiKey] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpYoutubeApiKey);
   const [youtubeChannelId, setYoutubeChannelId] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpYoutubeChannelId);
+  const [postRegex, setPostRegex] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpPostRegex);
+  const [postTemplate, setPostTemplate] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpPostTemplate);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {}, []);
   console.log('rendering settings');
   function saveSettings() {
@@ -75,6 +77,8 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
     data.append('nonce', settings.nonce);
     data.append('yttpYoutubeApiKey', youtubeApiKey);
     data.append('yttpYoutubeChannelId', youtubeChannelId);
+    data.append('yttpPostRegex', postRegex);
+    data.append('yttpPostTemplate', postTemplate);
     const paramsAsQueryString = new URLSearchParams(data);
     noticeOperations.removeAllNotices();
     noticeOperations.createNotice({
@@ -94,6 +98,7 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
       });
     });
   }
+  console.log('postSettings', postRegex, postTemplate);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Youtube To Post Settings"), noticeUI, (!settings.options.yttpYoutubeApiKey || !settings.options.yttpYoutubeChannelId) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -107,6 +112,11 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
   }, "YouTube Data API v3")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, "Create a Youtube API key ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://console.cloud.google.com/apis/credentials"
   }, "here")))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "wrap"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    className: "button button-primary",
+    onClick: () => saveSettings()
+  }, "Save Changes")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, "Youtube Channel ID"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     type: "text",
@@ -129,6 +139,26 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://console.cloud.google.com/apis/library/youtube.googleapis.com"
   }, "Google Search Console")))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "wrap"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, "Post-Settings"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+    label: "Filter your video-description by a regex expression. You can use all matches later",
+    type: "text",
+    value: postRegex,
+    onChange: v => {
+      setPostRegex(v);
+    },
+    placeholder: "/(.*)about this channel/ would take all text of the video description from top to \"about this channel\""
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+    label: "HTML template based on the regex matches from above. The first match can be accessed by __MATCH[0]__",
+    type: "text",
+    value: postTemplate,
+    onChange: v => {
+      setPostTemplate(v);
+    },
+    placeholder: "<h1>Good for you</h1>__MATCH[0]__  would result in a h1 headline, following by the content of the first match from the regex given above"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://regex101.com/"
+  }, "If you do not know how regex expressions work, give this a try: Regex101")))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "button button-primary",

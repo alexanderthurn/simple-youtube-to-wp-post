@@ -1,4 +1,4 @@
-import { withNotices, Button, Spinner, Flex, FlexBlock, FlexItem, Text, TextControl, Card, CardHeader, CardBody, CardFooter } from '@wordpress/components';
+import { withNotices, Button, TextareaControl, TextControl, Card, CardHeader, CardBody, CardFooter, CardDivider} from '@wordpress/components';
 import { useState, useEffect } from 'react';
 
 const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeUI, settings }) => {
@@ -6,6 +6,8 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
 
   const [youtubeApiKey, setYoutubeApiKey] = useState(settings.options.yttpYoutubeApiKey)
   const [youtubeChannelId, setYoutubeChannelId] = useState(settings.options.yttpYoutubeChannelId)
+  const [postRegex, setPostRegex] = useState(settings.options.yttpPostRegex)
+  const [postTemplate, setPostTemplate] = useState(settings.options.yttpPostTemplate)
 
   useEffect(() => {
     
@@ -13,14 +15,14 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
 
   console.log('rendering settings');
 
-
-
   function saveSettings() {
     const data = new FormData();
     data.append('action', 'yttp_options');
     data.append('nonce', settings.nonce);
     data.append('yttpYoutubeApiKey', youtubeApiKey);
     data.append('yttpYoutubeChannelId', youtubeChannelId);
+    data.append('yttpPostRegex', postRegex);
+    data.append('yttpPostTemplate', postTemplate);
 
     const paramsAsQueryString = new URLSearchParams(data);
     noticeOperations.removeAllNotices()
@@ -40,6 +42,8 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
       });
 
   }
+
+  console.log('postSettings', postRegex, postTemplate)
 
   return (
     <div class='wrap'>
@@ -62,6 +66,15 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
               </li>
                 </ul>
           </div> }
+
+          <div class="wrap">
+            <Button
+              className='button button-primary'
+              onClick={() => saveSettings()}
+            >
+              Save Changes
+            </Button>
+          </div>
 
               <div class="wrap">
             <Card>
@@ -100,6 +113,39 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
                   Google Search Console
                 </a>
               </CardFooter>
+            </Card>
+            </div>
+
+            <div class="wrap">
+            <Card>
+              <CardHeader>Post-Settings</CardHeader>
+              <CardBody>
+              <TextareaControl
+                label="Filter your video-description by a regex expression. You can use all matches later"
+                  type='text'
+                  value={postRegex}
+                  onChange={(v) => {
+                    setPostRegex(v)
+                  }}
+                  placeholder='/(.*)about this channel/ would take all text of the video description from top to "about this channel"'
+                />
+
+               <TextareaControl
+                label="HTML template based on the regex matches from above. The first match can be accessed by __MATCH[0]__"
+                  type='text'
+                  value={postTemplate}
+                  onChange={(v) => {
+                    setPostTemplate(v)
+                  }}
+                  placeholder='<h1>Good for you</h1>__MATCH[0]__  would result in a h1 headline, following by the content of the first match from the regex given above'
+                />
+
+
+
+              </CardBody>
+              <CardFooter>
+              <a href="https://regex101.com/">If you do not know how regex expressions work, give this a try: Regex101</a>
+                      </CardFooter>
             </Card>
             </div>
 

@@ -10,6 +10,8 @@ function yttp_options() {
     if (isset($_GET['yttpYoutubeApiKey']) && isset($_GET['yttpYoutubeChannelId'])) {
 		update_option('yttpYoutubeApiKey', sanitize_text_field($_GET['yttpYoutubeApiKey']));
 		update_option('yttpYoutubeChannelId', sanitize_text_field($_GET['yttpYoutubeChannelId']));
+        update_option('yttpPostTemplate', $_GET['yttpPostTemplate']);
+		update_option('yttpPostRegex', $_GET['yttpPostRegex']);
 	}
     
 	echo json_encode($result, JSON_PRETTY_PRINT);
