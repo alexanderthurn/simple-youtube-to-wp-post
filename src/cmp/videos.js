@@ -92,9 +92,7 @@ function YoutubeToPostAdminPageList({settings}) {
   if (!settings.options.yttpYoutubeApiKey || !settings.options.yttpYoutubeChannelId) {
     return <div class="wrap">
         <h2>Welcome to Youtube-To-Post</h2>
-        In order to use this plugin, you just need to configure your <b>youtube-channel-id</b> and your <b>youtube-api-key</b>. It is not difficult, totally free and can be done in settings. I will help you to set it up.
-        <p>Click <a href="">here</a> to get to the settings page to get started</p>
-        <p>Hint: This plugin is 100% free and open source. You can check and modify the sourcecode on Github</p>
+         <p>Click <a href="">here</a> to get to the settings page to get started</p>
       </div>
   }
 
