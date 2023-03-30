@@ -113,7 +113,7 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
             </Button>
           </div>
           <div class="wrap">
-          <p>Hint: This plugin is 100% free and open source. You can check and modify the sourcecode on <a href="">Github</a>. Author: <a href="mailto:athurn@gmx.de">Alexander Thurn</a></p>
+          <p>Hint: This plugin is 100% free and open source. You can check and modify the sourcecode on <a href="https://github.com/alexanderthurn/youtube-to-post-wordpress-plugin">Github</a>. Author: <a href="mailto:athurn@gmx.de">Alexander Thurn</a></p>
           </div>
     </div>
   );
