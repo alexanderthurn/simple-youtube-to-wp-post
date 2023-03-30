@@ -52,7 +52,7 @@ class YoutubeToPostPlugin {
 			'optionsUrl' => admin_url('options.php'),
 			'nonce' => wp_create_nonce('yttp-nonce'),
 			'route' => $_REQUEST['page'],
-			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'), 'yttpPostRegex' => get_option('yttpPostRegex'), 'yttpPostTemplate' => get_option('yttpPostTemplate'))
+			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'), 'yttpPostRegex' => stripslashes(get_option('yttpPostRegex')), 'yttpPostTemplate' => stripslashes(get_option('yttpPostTemplate')))
 		));
 	}
 

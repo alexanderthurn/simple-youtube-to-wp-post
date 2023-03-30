@@ -163,7 +163,7 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "button button-primary",
     onClick: () => saveSettings()
-  }, "Save Changes")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Save Changes"), noticeUI), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Hint: This plugin is 100% free and open source. You can check and modify the sourcecode on ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://github.com/alexanderthurn/youtube-to-post-wordpress-plugin"

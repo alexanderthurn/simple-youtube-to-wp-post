@@ -32,7 +32,7 @@ npm run start
 
 Regex
 ```
-(.*)Über die Werteherren
+/(.*)Über die Werteherren/
 ```
 
 Template
