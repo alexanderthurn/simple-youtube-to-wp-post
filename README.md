@@ -1,11 +1,12 @@
 # Youtube To Post Wordpress Plugin
 > A plugin to create wordpress posts from youtube videos
 
-If you own a youtube channel and a wordpress sites, you may want to automize your process creating video and blog at the same time. With this plugin you create posts based on youtube videos and can modify them afterwards like usual
+You own a youtube channel <b>And</b> a wordpress site?
+You want to automize your process creating videos and blog-posts at the same time? With this plugin you can create posts based on youtube videos and can modify them afterwards like usual
 
 ## Features
 
-* Simple one click creation of post based on your youtube videos 
+* Simple one click creation of posts based on your youtube videos 
 
 ## Getting started
 
