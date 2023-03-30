@@ -29,7 +29,7 @@ class YoutubeToPostPlugin {
 		$pageList = add_menu_page( 'Youtube To Post', ' Youtube To Post', 'manage_options', 'yttp-videos', array($this, 'getHTMLMain'), 'dashicons-media-video' );
 		add_action('load-' . $pageList, array($this,'loadAdminJS'));
 
-		$pageListSub = add_submenu_page( 'yttp-videos', 'Youtube To Post', 'Youtube Videos', 'manage_options', 'yttp-videos', array($this, 'getHTMLMain'), 10);
+		$pageListSub = add_submenu_page( 'yttp-videos', 'Youtube To Post', 'Videos', 'manage_options', 'yttp-videos', array($this, 'getHTMLMain'), 10);
 		add_action('load-' . $pageListSub, array($this,'loadAdminJS'));
 
 		$pageSettings = add_submenu_page( 'yttp-videos', 'Settings', ' Settings', 'manage_options', 'yttp-settings', array($this, 'getHTMLMain'), 10);

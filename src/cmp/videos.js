@@ -113,9 +113,10 @@ function YoutubeToPostAdminPageList({settings}) {
               videos.length > 0 &&
               videos.map((video) => (
                 <tr>
-                  <td>{video.title}</td>
+                  <td>
+                  {video.post_id  ? <a href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>{video.title}</a> : video.title}
+                  </td>
                   <td>{video.id}</td>
-                  
                   
                   <td>
                      {video.post_id  ? <a  className='button button-secondary' href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>Open Post</a> : 

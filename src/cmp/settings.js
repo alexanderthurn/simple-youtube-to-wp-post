@@ -48,7 +48,7 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
           <h1>Youtube To Post Settings</h1>
           { noticeUI }
           <div className="wrap">
-            <TextControl type="text" label="Youtube API Key" value={youtubeApiKey} onChange={(v) => {setYoutubeApiKey(v)}} placeholder="AIza...........nqCQ" />
+            <TextControl type="password" label="Youtube API Key" value={youtubeApiKey} onChange={(v) => {setYoutubeApiKey(v)}} placeholder="AIza...........nqCQ" />
             <TextControl type="text" label="Youtube Channel ID" value={youtubeChannelId} onChange={(v) => {setYoutubeChannelId(v)}} placeholder="UCzN_yRlMz4pyW-LJZJrxTRw" />
             <Button className='button button-primary' onClick={() => saveSettings()}>Save Changes</Button>
           </div>
