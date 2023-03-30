@@ -12,7 +12,7 @@ With this plugin you can create posts based on your youtube videos and modify th
 ## Getting started
 
 * Install this plugin, e.g. copy it in the plugins directory. 
-* Active the plugin.
+* Activate the plugin.
 * Enter your Channel ID and "YouTube Data API v3" Key in the settings.
 
 * Channel-ID: https://www.youtube.com/account_advanced
