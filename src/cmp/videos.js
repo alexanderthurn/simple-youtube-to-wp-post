@@ -88,6 +88,15 @@ function YoutubeToPostAdminPageList({settings}) {
   }, []);
 
   console.log('rendering', videos, settings);
+  
+  if (!settings.options.yttpYoutubeApiKey || !settings.options.yttpYoutubeChannelId) {
+    return <div class="wrap">
+        <h2>Welcome to Youtube-To-Post</h2>
+        In order to use this plugin, you just need to configure your <b>youtube-channel-id</b> and your <b>youtube-api-key</b>. It is not difficult, totally free and can be done in settings. I will help you to set it up.
+        <p>Click <a href="">here</a> to get to the settings page to get started</p>
+        <p>Hint: This plugin is 100% free and open source. You can check and modify the sourcecode on Github</p>
+      </div>
+  }
 
   return (
     <div class="wrap">
@@ -114,7 +123,7 @@ function YoutubeToPostAdminPageList({settings}) {
 
             {videos !== undefined && videos.length == 0 && (
               <tr>
-                <td colspan='3'>0 results from youtube. Make sure you configured your Youtube-Channel-Id and your Youtube-Api-Key correctly in 'Settings'</td>
+                <td colspan='3'>0 results from youtube. Make sure you configured your Youtube-Channel-Id and your Youtube-Api-Key correctly under 'Settings'</td>
               </tr>
             )}
 

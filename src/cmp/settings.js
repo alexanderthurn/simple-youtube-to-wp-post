@@ -1,4 +1,4 @@
-import { withNotices, Button, Spinner, Flex, FlexBlock, FlexItem, Text, TextControl } from '@wordpress/components';
+import { withNotices, Button, Spinner, Flex, FlexBlock, FlexItem, Text, TextControl, Card, CardHeader, CardBody, CardFooter } from '@wordpress/components';
 import { useState, useEffect } from 'react';
 
 const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeUI, settings }) => {
@@ -43,18 +43,56 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
 
   return (
     <div class='wrap'>
-      <Flex>
-        <FlexBlock>
           <h1>Youtube To Post Settings</h1>
-          { noticeUI }
-          <div className="wrap">
-            <TextControl type="password" label="Youtube API Key" value={youtubeApiKey} onChange={(v) => {setYoutubeApiKey(v)}} placeholder="AIza...........nqCQ" />
-            <TextControl type="text" label="Youtube Channel ID" value={youtubeChannelId} onChange={(v) => {setYoutubeChannelId(v)}} placeholder="UCzN_yRlMz4pyW-LJZJrxTRw" />
-            <Button className='button button-primary' onClick={() => saveSettings()}>Save Changes</Button>
+          {noticeUI}
+          <div class="wrap">
+            <Card>
+              <CardHeader>Youtube API Key</CardHeader>
+              <CardBody>
+                <TextControl
+                  type='password'
+                  value={youtubeApiKey}
+                  onChange={(v) => {
+                    setYoutubeApiKey(v);
+                  }}
+                  placeholder='AIza...........nqCQ'
+                />
+              </CardBody>
+              <CardFooter>
+                <a href='https://console.cloud.google.com/apis/library/youtube.googleapis.com'>
+                  You need an api key from youtube/google. It is free and can be
+                  created in the google search console
+                </a>
+              </CardFooter>
+            </Card>
+            </div>
+
+              <div class="wrap">
+            <Card>
+              <CardHeader>Youtube Channel ID</CardHeader>
+              <CardBody>
+                  <TextControl
+                  type='text'
+                  value={youtubeChannelId}
+                  onChange={(v) => {
+                    setYoutubeChannelId(v);
+                  }}
+                  placeholder='UCzN_yRlMz4pyW-LJZJrxTRw'
+                />
+              </CardBody>
+              <CardFooter>
+              <a href='https://www.youtube.com/account_advanced'> You can find your channel-id here</a>
+              </CardFooter>
+            </Card>
+            </div>
+           <div class="wrap">
+            <Button
+              className='button button-primary'
+              onClick={() => saveSettings()}
+            >
+              Save Changes
+            </Button>
           </div>
-         
-        </FlexBlock>
-      </Flex>
     </div>
   );
 })
