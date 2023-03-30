@@ -10,8 +10,12 @@ If you own a youtube channel and a wordpress sites, you may want to automize you
 ## Getting started
 
 Install this plugin, e.g. copy it in the plugins directory. 
-Active the plugin
-Enter your Channel ID and Youtube API Key in the settings
+Active the plugin.
+Enter your Channel ID and "YouTube Data API v3" Key in the settings.
+
+Channel-ID: https://www.youtube.com/account_advanced
+Api-Key: https://console.cloud.google.com/apis/library/youtube.googleapis.com
+
 
 ## Development
 
@@ -22,6 +26,8 @@ cd youtube-to-post
 npm install
 npm run start
 ````
+
+
 
 ## Author
 

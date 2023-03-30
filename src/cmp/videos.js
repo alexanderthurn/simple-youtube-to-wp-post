@@ -5,9 +5,14 @@ function YoutubeToPostAdminPageList({settings}) {
   console.log('rendering videos', settings);
   const [videos, setVideos] = useState(undefined);
   
-  
   async function createArticle(id) {
     console.log('creating article ' + id);
+
+    var oldVideos = videos.map((v) => {
+      if (v.id === id) v.loading = 'true'
+      return v
+    })
+    setVideos(oldVideos)
 
     let video = await fetchYoutubeVideoDetails(id)
     console.log(video);
@@ -26,9 +31,13 @@ function YoutubeToPostAdminPageList({settings}) {
     }).then((response) => response.json());
 
     var newVideos = videos.map((v) => {
-      if (v.id === id) v.post_id = wpResult.post_id
+      if (v.id === id) {
+        v.post_id = wpResult.post_id
+        v.loading = false
+      }
       return v
      })
+
     setVideos(newVideos)
   }
 
@@ -105,7 +114,7 @@ function YoutubeToPostAdminPageList({settings}) {
 
             {videos !== undefined && videos.length == 0 && (
               <tr>
-                <td colspan='3'>0 results from Youtube. Make sure you configured your Youtube-ChannelId and your Youtube-ApiKey in 'Settings'</td>
+                <td colspan='3'>0 results from youtube. Make sure you configured your Youtube-Channel-Id and your Youtube-Api-Key correctly in 'Settings'</td>
               </tr>
             )}
 
@@ -114,20 +123,20 @@ function YoutubeToPostAdminPageList({settings}) {
               videos.map((video) => (
                 <tr>
                   <td>
-                  {video.post_id  ? <a href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>{video.title}</a> : video.title}
+                  {video.post_id ? <a href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>{video.title}</a> : video.title}
                   </td>
                   <td>{video.id}</td>
                   
                   <td>
-                     {video.post_id  ? <a  className='button button-secondary' href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>Open Post</a> : 
-                    <Button
+                     {video.post_id ? <a  className='button button-secondary' href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>Open Post</a> : 
+                     (video.loading ? <Spinner /> : <Button
                       className='button button-primary'
                       onClick={() => {
                         createArticle(video.id);
                       }}
                     >
                       Create post
-                    </Button>}
+                    </Button>)}
                   </td>
                 </tr>
               ))}

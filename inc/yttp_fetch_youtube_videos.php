@@ -57,15 +57,14 @@ function yttp_fetchYoutubeVideos() {
 		$VIDEO_ID = $_GET['VIDEO_ID'];
 	}
 
-	$url = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={$CHANNEL_ID}&maxResults=5&order=date&type=video&key={$YOUR_API_KEY}";
+	$url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId={$CHANNEL_ID}&maxResults=5&order=date&key={$YOUR_API_KEY}";
 
 	if ($VIDEO_ID) {
 		$url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id={$VIDEO_ID}&key={$YOUR_API_KEY}";
 	}
 
 	
-
-	if (TRUE) {
+	if (FALSE) {
 		
 		if ($VIDEO_ID) {
 			//echo '{ "ok": "wg", "title" : "BlueWallet entfernt Lightning Funktion zum 30.04.2023 - Guthaben in Gefahr? Ich buche ab", "post_id" :"22", "attachment_id" :"23"}';
@@ -98,7 +97,7 @@ function yttp_fetchYoutubeVideos() {
 		$title = $item["snippet"]["title"];
 		$description = $item["snippet"]["description"];
 		$thumbnail = $item["snippet"]["thumbnails"]["maxres"]["url"];
-		$entry = array("id" => $id, "title" => $title, "description" => $description, "thumbnail" => $thumbnail);
+		$entry = array("id" => $id, "title" => $title, "description" => $description, "thumbnail" => $thumbnail, "raw" => $item);
 
 		if ($VIDEO_ID) {
 			if ($id !== $VIDEO_ID) {

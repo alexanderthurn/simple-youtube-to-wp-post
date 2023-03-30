@@ -150,6 +150,11 @@ function YoutubeToPostAdminPageList(_ref) {
   const [videos, setVideos] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(undefined);
   async function createArticle(id) {
     console.log('creating article ' + id);
+    var oldVideos = videos.map(v => {
+      if (v.id === id) v.loading = 'true';
+      return v;
+    });
+    setVideos(oldVideos);
     let video = await fetchYoutubeVideoDetails(id);
     console.log(video);
     const data = new FormData();
@@ -164,7 +169,10 @@ function YoutubeToPostAdminPageList(_ref) {
       body: data
     }).then(response => response.json());
     var newVideos = videos.map(v => {
-      if (v.id === id) v.post_id = wpResult.post_id;
+      if (v.id === id) {
+        v.post_id = wpResult.post_id;
+        v.loading = false;
+      }
       return v;
     });
     setVideos(newVideos);
@@ -220,12 +228,12 @@ function YoutubeToPostAdminPageList(_ref) {
     colspan: "10"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null))), videos !== undefined && videos.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     colspan: "3"
-  }, "0 results from Youtube. Make sure you configured your Youtube-ChannelId and your Youtube-ApiKey in 'Settings'")), videos !== undefined && videos.length > 0 && videos.map(video => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.post_id ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, "0 results from youtube. Make sure you configured your Youtube-Channel-Id and your Youtube-Api-Key correctly in 'Settings'")), videos !== undefined && videos.length > 0 && videos.map(video => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.post_id ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: '/wp-admin/post.php?post=' + video.post_id + '&action=edit'
   }, video.title) : video.title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.id), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.post_id ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     className: "button button-secondary",
     href: '/wp-admin/post.php?post=' + video.post_id + '&action=edit'
-  }, "Open Post") : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }, "Open Post") : video.loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "button button-primary",
     onClick: () => {
       createArticle(video.id);
