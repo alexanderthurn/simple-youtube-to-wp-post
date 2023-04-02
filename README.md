@@ -8,6 +8,8 @@ With this plugin you can create posts based on your youtube videos and modify th
 
 ## Features
 
+Version 1.0.0
+
 * Simple one click creation of posts based on your youtube videos 
 * Regular expressions to use only some parts of the video description
 * Simple blog template in which you can define where the description of the video will be placed, gutenberg blocks are supported

@@ -3,7 +3,7 @@
 	Plugin Name: Youtube To Post
 	Description: Create a post from a youtube video
 	Author: chefmangoo (Alexander Thurn)
-	Version: 1.0
+	Version: 1.0.0
 	Requires at least: 5.5
 	Requires PHP: 7.4.30
 	License: MIT
