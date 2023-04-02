@@ -1,5 +1,5 @@
-=== Simple Youtube To Wordpress Post ===
-Stable tag: 1.0.2
+=== Simple Youtube To WP Post ===
+Stable tag: 1.0.3
 Requires at least: 5.5
 Tested up to: 6.2
 Requires PHP: 7.4.30

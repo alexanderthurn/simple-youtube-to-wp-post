@@ -1,4 +1,4 @@
-# Simple Youtube To Wordpress Post
+# Simple Youtube To WP Post
 
 > A plugin to create wordpress posts from youtube videos
 
@@ -8,7 +8,7 @@ With this plugin you can create posts based on your youtube videos and modify th
 
 ## Features
 
-Version 1.0.2
+Version 1.0.3
 
 * Simple one click creation of posts based on your youtube videos 
 * Regular expressions to use only some parts of the video description

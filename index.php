@@ -1,9 +1,9 @@
 <?php
 /*
-	Plugin Name: Simple Youtube To Wordpress Post
+	Plugin Name: Simple Youtube To WP Post
 	Description: Create a post from a youtube video
 	Author: chefmangoo (Alexander Thurn)
-	Version: 1.0.2
+	Version: 1.0.3
 	Requires at least: 5.5
 	Requires PHP: 7.4.30
 	License: MIT
