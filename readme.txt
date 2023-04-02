@@ -1,5 +1,5 @@
-=== wp-youtube-to-post ===
-Stable tag: 1.0.0
+=== wp-simple-youtube-to-post ===
+Stable tag: 1.0.1
 Requires at least: 5.5
 Tested up to: 6.2
 Requires PHP: 7.4.30
