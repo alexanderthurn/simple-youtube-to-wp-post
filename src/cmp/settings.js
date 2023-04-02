@@ -2,8 +2,6 @@ import { withNotices, Button, TextareaControl, TextControl, Card, CardHeader, Ca
 import { useState, useEffect } from 'react';
 
 const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeUI, settings }) => {
-  console.log('rendering settings', settings);
-
   const [youtubeApiKey, setYoutubeApiKey] = useState(settings.options.yttpYoutubeApiKey)
   const [youtubeChannelId, setYoutubeChannelId] = useState(settings.options.yttpYoutubeChannelId)
   const [postRegex, setPostRegex] = useState(settings.options.yttpPostRegex)
@@ -13,7 +11,6 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
     
   }, []);
 
-  console.log('rendering settings');
 
   function saveSettings() {
     const data = new FormData();
@@ -35,15 +32,12 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log('updateSettings', result);
-        //alert('Saved')
         noticeOperations.removeAllNotices()
         noticeOperations.createNotice( { status: 'success', content: 'Settings saved' } );
       });
 
   }
 
-  console.log('postSettings', postRegex, postTemplate)
 
   return (
     <div class='wrap'>
@@ -137,7 +131,15 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
                   onChange={(v) => {
                     setPostTemplate(v)
                   }}
-                  placeholder='<h1>Good for you</h1>__GROUP[0]__  would result in a h1 headline, followed by the content of the first group'
+                  placeholder='<!-- wp:paragraph -->
+                  __GROUP[0]__
+                  <!-- /wp:paragraph -->
+              
+                  <!-- wp:embed {"url":"https://www.youtube.com/embed/__VIDEO_ID__","type":"rich","providerNameSlug":"embed-handler","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+                  <figure class="wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+                  https://www.youtube.com/embed/__VIDEO_ID__
+                  </div></figure>
+                  <!-- /wp:embed -->'
                 />
 
               </CardBody>

@@ -1,9 +1,13 @@
 <?php
 /*
 	Plugin Name: Youtube To Post
-	Description: Create an article from a youtube video
-	Author: Alexander Thurn
-	Version: 0.2
+	Description: Create a post from a youtube video
+	Author: chefmangoo (Alexander Thurn)
+	Version: 1.0
+	Requires at least: 5.5
+	Requires PHP: 7.4.30
+	License: MIT
+	License URI: https://opensource.org/licenses/MIT
 */
 
 if (! defined('ABSPATH')) exit;
@@ -41,11 +45,11 @@ class YoutubeToPostPlugin {
 		add_action('admin_enqueue_scripts', array($this, 'enqueueJS'));
 	}
 
-	function enqueueJS( $hook ) {
+	function enqueueJS() {
 		wp_enqueue_script('yttp_scripts', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-components'), 1.0);
 		wp_enqueue_style('yttp_style', plugin_dir_url(__FILE__) . 'build/index.css', array(), '1.0');
 
-		global $pagenow;
+		error_log('js added');
 		wp_localize_script('yttp_scripts', 'yttpData', array(
 			'ajaxUrl' => admin_url('admin-ajax.php'),
 			'optionsUrl' => admin_url('options.php'),

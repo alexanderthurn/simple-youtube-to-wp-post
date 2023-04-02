@@ -1,12 +1,12 @@
 === wp-youtube-to-post ===
+Stable tag: 1.0.0
+Requires at least: 5.5
+Tested up to: 6.2
+Requires PHP: 7.4.30
 Contributors: chefmangoo
 Tags: youtube, post, video, generation, automation, create
-Requires at least: 4.9
-Tested up to: 6.2
-Stable tag: 1.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
-Requires PHP: 7.0
 
 A plugin to create wordpress posts from youtube videos
 

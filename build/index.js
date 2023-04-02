@@ -23,7 +23,6 @@ function YoutubeToPostAdminPageMain(_ref) {
   let {
     settings
   } = _ref;
-  console.log('rendering main', settings);
   switch (settings.route) {
     case 'yttp-settings':
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_settings__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -64,13 +63,11 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
     noticeUI,
     settings
   } = _ref;
-  console.log('rendering settings', settings);
   const [youtubeApiKey, setYoutubeApiKey] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpYoutubeApiKey);
   const [youtubeChannelId, setYoutubeChannelId] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpYoutubeChannelId);
   const [postRegex, setPostRegex] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpPostRegex);
   const [postTemplate, setPostTemplate] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpPostTemplate);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {}, []);
-  console.log('rendering settings');
   function saveSettings() {
     const data = new FormData();
     data.append('action', 'yttp_options');
@@ -89,8 +86,6 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
       method: 'POST',
       body: data
     }).then(response => response.json()).then(result => {
-      console.log('updateSettings', result);
-      //alert('Saved')
       noticeOperations.removeAllNotices();
       noticeOperations.createNotice({
         status: 'success',
@@ -98,7 +93,6 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
       });
     });
   }
-  console.log('postSettings', postRegex, postTemplate);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Youtube To Post Settings"), noticeUI, (!settings.options.yttpYoutubeApiKey || !settings.options.yttpYoutubeChannelId) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -155,7 +149,7 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
     onChange: v => {
       setPostTemplate(v);
     },
-    placeholder: "<h1>Good for you</h1>__GROUP[0]__  would result in a h1 headline, followed by the content of the first group"
+    placeholder: "<!-- wp:paragraph -->\r __GROUP[0]__\r <!-- /wp:paragraph -->\r <!-- wp:embed {\"url\":\"https://www.youtube.com/embed/__VIDEO_ID__\",\"type\":\"rich\",\"providerNameSlug\":\"embed-handler\",\"responsive\":true,\"className\":\"wp-embed-aspect-16-9 wp-has-aspect-ratio\"} -->\r <figure class=\"wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio\"><div class=\"wp-block-embed__wrapper\">\r https://www.youtube.com/embed/__VIDEO_ID__\r </div></figure>\r <!-- /wp:embed -->"
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://regex101.com/"
   }, "If you do not know how regex expressions work, give this a try: Regex101")))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -198,17 +192,14 @@ function YoutubeToPostAdminPageList(_ref) {
   let {
     settings
   } = _ref;
-  console.log('rendering videos', settings);
   const [videos, setVideos] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(undefined);
   async function createArticle(id) {
-    console.log('creating article ' + id);
     var oldVideos = videos.map(v => {
       if (v.id === id) v.loading = 'true';
       return v;
     });
     setVideos(oldVideos);
     let video = await fetchYoutubeVideoDetails(id);
-    console.log(video);
     const data = new FormData();
     data.append('action', 'yttp_creatArticle');
     data.append('nonce', settings.nonce);
@@ -239,10 +230,8 @@ function YoutubeToPostAdminPageList(_ref) {
       method: 'POST',
       body: data
     }).then(response => response.json()).then(result => {
-      console.log('fetchYoutubeVideoDetails', result);
       return result;
     }).then(result => {
-      console.log('fetchYoutubeVideoDetails2', result);
       return result.videos[0];
     });
   }
@@ -255,22 +244,19 @@ function YoutubeToPostAdminPageList(_ref) {
       method: 'POST',
       body: data
     }).then(response => response.json()).then(result => {
-      console.log('fetchYoutubeVideos', result);
       return result.videos;
     });
   }
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
     fetchYoutubeVideos().then(videos => {
-      console.log('setVideos', videos);
       setVideos(videos);
     });
   }, []);
-  console.log('rendering', videos, settings);
   if (!settings.options.yttpYoutubeApiKey || !settings.options.yttpYoutubeChannelId) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       class: "wrap"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Welcome to Youtube-To-Post"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Click ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: ""
+      href: "?page=yttp-settings"
     }, "here"), " to get to the settings page to get started"));
   }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

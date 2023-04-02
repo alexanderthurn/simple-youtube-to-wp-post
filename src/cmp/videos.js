@@ -2,11 +2,9 @@ import { Button, Spinner, Flex, FlexBlock } from '@wordpress/components';
 import { useState, useEffect } from 'react';
 
 function YoutubeToPostAdminPageList({settings}) {
-  console.log('rendering videos', settings);
   const [videos, setVideos] = useState(undefined);
   
   async function createArticle(id) {
-    console.log('creating article ' + id);
 
     var oldVideos = videos.map((v) => {
       if (v.id === id) v.loading = 'true'
@@ -15,7 +13,6 @@ function YoutubeToPostAdminPageList({settings}) {
     setVideos(oldVideos)
 
     let video = await fetchYoutubeVideoDetails(id)
-    console.log(video);
     
     const data = new FormData();
     data.append('action', 'yttp_creatArticle');
@@ -54,11 +51,9 @@ function YoutubeToPostAdminPageList({settings}) {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log('fetchYoutubeVideoDetails', result);
         return result
       })
       .then((result) => {
-        console.log('fetchYoutubeVideoDetails2', result);
         return result.videos[0];
       });
   }
@@ -75,24 +70,21 @@ function YoutubeToPostAdminPageList({settings}) {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log('fetchYoutubeVideos', result);
         return result.videos
       });
   }
 
   useEffect(() => {
     fetchYoutubeVideos().then((videos) => {
-      console.log('setVideos', videos);
       setVideos(videos);
     });
   }, []);
 
-  console.log('rendering', videos, settings);
   
   if (!settings.options.yttpYoutubeApiKey || !settings.options.yttpYoutubeChannelId) {
     return <div class="wrap">
         <h2>Welcome to Youtube-To-Post</h2>
-         <p>Click <a href="">here</a> to get to the settings page to get started</p>
+         <p>Click <a href="?page=yttp-settings">here</a> to get to the settings page to get started</p>
       </div>
   }
 
