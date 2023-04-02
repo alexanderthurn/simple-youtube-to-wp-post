@@ -16,7 +16,6 @@ require_once plugin_dir_path(__FILE__) . 'inc/yttp_options.php';
 
 class YoutubeToPostPlugin {
 	function __construct() {
-		error_log('Hallo from construct');
 		add_action('admin_menu', array($this, 'adminMenu'));
 		add_action('wp_ajax_yttp_creatArticle', 'yttp_creatArticle' );
 		add_action('wp_ajax_yttp_fetchYoutubeVideos', 'yttp_fetchYoutubeVideos' );

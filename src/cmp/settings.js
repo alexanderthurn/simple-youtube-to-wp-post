@@ -118,29 +118,27 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
 
             <div class="wrap">
             <Card>
-              <CardHeader>Post-Settings</CardHeader>
+              <CardHeader>Advanced Post-Settings (optional)</CardHeader>
               <CardBody>
               <TextareaControl
-                label="Filter your video-description by a regex expression. You can use all matches later"
+                label="Filter your video-description by a regex expression. You can use the found regex groups in the inline-template below"
                   type='text'
                   value={postRegex}
                   onChange={(v) => {
                     setPostRegex(v)
                   }}
-                  placeholder='/(.*)about this channel/ would take all text of the video description from top to "about this channel"'
+                  placeholder='/(.*)about this channel/misu would take all text of the video description from top to "about this channel". misu is for matching multiline and more'
                 />
 
                <TextareaControl
-                label="HTML template based on the regex matches from above. The first match can be accessed by __MATCH[0]__"
+                label="HTML/Gutenberg Inline-Template using the regex groups from above. The first group can be accessed by __GROUP[0]__. The ID of the video is __VIDEO_ID__"
                   type='text'
                   value={postTemplate}
                   onChange={(v) => {
                     setPostTemplate(v)
                   }}
-                  placeholder='<h1>Good for you</h1>__MATCH[0]__  would result in a h1 headline, following by the content of the first match from the regex given above'
+                  placeholder='<h1>Good for you</h1>__GROUP[0]__  would result in a h1 headline, followed by the content of the first group'
                 />
-
-
 
               </CardBody>
               <CardFooter>

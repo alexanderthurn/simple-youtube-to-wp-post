@@ -42,8 +42,6 @@ function enrichResultWithExistingPosts($result) {
 }
 
 function yttp_fetchYoutubeVideos() {
-	error_log('Hallo from yttp_fetchYoutubeVideos');
-	
 	$YOUR_API_KEY = get_option('yttpYoutubeApiKey');
 	$CHANNEL_ID = get_option('yttpYoutubeChannelId');
 	$VIDEO_ID = null;
@@ -96,7 +94,10 @@ function yttp_fetchYoutubeVideos() {
 
 		$title = $item["snippet"]["title"];
 		$description = $item["snippet"]["description"];
-		$thumbnail = $item["snippet"]["thumbnails"]["maxres"]["url"];
+		$thumbnail = $item["snippet"]["thumbnails"]["default"]["url"];
+		if (isset($item["snippet"]["thumbnails"]["maxres"])) {
+			$thumbnail = $item["snippet"]["thumbnails"]["maxres"]["url"];
+		}
 		$entry = array("id" => $id, "title" => $title, "description" => $description, "thumbnail" => $thumbnail, "raw" => $item);
 
 		if ($VIDEO_ID) {

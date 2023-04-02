@@ -19,24 +19,22 @@ function yttp_creatArticle() {
     $postRegex = stripslashes(get_option('yttpPostRegex'));
     $postTemplate = stripslashes(get_option('yttpPostTemplate'));
 
-    if (!$postRegex) $postRegex = '/(.*)/';
-    if (!$postTemplate) $postTemplate = '__MATCH[0]__';
+    if (!$postRegex) $postRegex = '/(.*)/misu';
+    if (!$postTemplate) $postTemplate = '__GROUP[0]__';
     
     $content = $postTemplate;
     @preg_match_all($postRegex, $description, $matches, PREG_SET_ORDER, 0);
     if ($matches && sizeof($matches) > 0) {
-        if (sizeof($matches[0]) > 1) $content = str_replace("__MATCH[0]__", $matches[0][1], $content);
-        if (sizeof($matches[0]) > 2) $content = str_replace("__MATCH[1]__", $matches[0][2], $content);
-        if (sizeof($matches[0]) > 3) $content = str_replace("__MATCH[2]__", $matches[0][3], $content);
+        if (sizeof($matches[0]) > 1) $content = str_replace("__GROUP[0]__", $matches[0][1], $content);
+        if (sizeof($matches[0]) > 2) $content = str_replace("__GROUP[1]__", $matches[0][2], $content);
+        if (sizeof($matches[0]) > 3) $content = str_replace("__GROUP[2]__", $matches[0][3], $content);
     } else {
-        $content = str_replace("__MATCH[0]__", $description, $content);
+        $content = str_replace("__GROUP[0]__", $description, $content);
     }
     $content = str_replace("__VIDEO_ID__", $id, $content);
 
-
     $new_post = array(
         'post_title'   => $title,
-        //'post_content' => explode("Über die Werteherren:", $description)[0] . '<br /><iframe width="640" height="430" src="https://www.youtube.com/embed/' .$id.'"></iframe>',
         'post_content' => $content,
         'post_status'  => 'draft',
         'post_author'  => get_current_user_id(),
