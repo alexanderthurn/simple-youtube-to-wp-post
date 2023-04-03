@@ -2,17 +2,17 @@
 
 > A plugin to create wordpress posts from youtube videos
 
-You own a youtube channel <b>AND</b> a wordpress site?
-You want to create a video and afterwards a blog-post with the same description and a link to the video? 
-With this plugin you can create posts based on your youtube videos and modify them afterwards like usual
+Do you own a youtube channel <b>AND</b> a wordpress site?
+Do you create videos and based on them you create posts? With a similar description and a link to the video? 
+
+**With this plugin you can create posts based on your youtube videos and modify them afterwards like usual**
 
 ## Features
-
-Version 1.0.3
 
 * Simple one click creation of posts based on your youtube videos 
 * Regular expressions to use only some parts of the video description
 * Simple blog template in which you can define where the description of the video will be placed, gutenberg blocks are supported
+* Extendable via action hook after post + attachment creation
 
 ## Getting started
 
@@ -37,9 +37,9 @@ npm run start
 ```
 ### Post-Settings example
 
-With post-settings you can define what part of the description will be taken and how it is placed within the post content.
+With post-settings you can define what part of the description will be taken and how it is placed within the post content. You can also define a page_template if needed.
 
-Regex
+**Regex**
 
 ```
 /(.*)Über die Werteherren/misu
@@ -49,7 +49,7 @@ The content in the round brackets are saved as regex-groups. The first () will b
 
 Those fields can be used in a configurable inline-template, which takes those values and can contain html and gutenberg markup code.
 
-Inline-Template
+**Inline-Template**
 
 ```
     __GROUP[0]__
@@ -78,9 +78,17 @@ You can also use blocks in the template, e.g. to add a gutenberg table or video 
 
 ```
 
+**Page Template**
+
+In case your theme supports page_templates for posts, you can define one. A page template is a .php file located in the theme directory, which will be used for the post instead of the default/single.php.
+
+```
+a-custom-page-template.php
+```
+
 ## Hooks
 
-There is one hook available namend *yttp_after_post_creation*, which is called "after" post and attachment creation. 
+There is one hook available namend **yttp_after_post_creation**, which is executed "after" post and attachment creation. 
 It contains the success state, the post itself if created, the post_id and the attachment_id if set
 
 Example
