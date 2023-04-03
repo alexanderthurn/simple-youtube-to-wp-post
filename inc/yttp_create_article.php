@@ -2,15 +2,16 @@
 
 function yttp_creatArticle() {
     
+    $result = array(
+        'success' => false,
+    );
+
     if ( ! wp_verify_nonce( $_POST['nonce'], 'yttp-nonce' ) ) {
-        die ( 'Busted!');
+        $result['error'] = 'internal error';
+        echo json_encode($result);      
+        die;
     }
     
-    wp_get_current_user();
-
-    
-    
-
     $id = $_POST['id'];
     $title = $_POST['title'];
     $description = $_POST['description'];
@@ -43,13 +44,20 @@ function yttp_creatArticle() {
     );
 
     $post_id = wp_insert_post($new_post);
+    $result['post_id'] = $post_id;
+
+    if( is_wp_error( $post_id ) ) {
+        $result['error'] = 'unable to create post';
+        echo json_encode($result);      
+        die;
+    }
+
     add_post_meta($post_id, 'yytp_id', $id, false);
     
     if ($pageTemplate) {
         $new_post['page_template'] = $pageTemplate;
         update_post_meta($post_id, '_wp_page_template', $pageTemplate);
     }
-
 
     $attachment_id = null;
     if ($thumbnail) {
@@ -58,15 +66,10 @@ function yttp_creatArticle() {
             set_post_thumbnail($post_id, $attachment_id);   
         }
     }
+    $result['attachment_id'] = $attachment_id;
+    $result['success'] = true;
+    $result['post'] = $new_post;
 
-    $result = array(
-        'success' => true,
-        'post' => $new_post,
-        'post_id' => $post_id,
-        'attachment_id' => $attachment_id
-    );
-
-    
     do_action('yttp_after_post_creation', $result);
 
     echo json_encode($result);

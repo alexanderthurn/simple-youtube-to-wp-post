@@ -148,6 +148,7 @@ You can define which parts of the video description should be taken and how they
 
 ## TODO
 
+* Create html newlines and urls based on the youtube description
 * Add Elementor-Support: https://stackoverflow.com/questions/63898766/wordpress-programmatically-insert-elementor-widgets-in-a-page
 
 ## License
