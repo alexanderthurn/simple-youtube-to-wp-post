@@ -67,6 +67,7 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
   const [youtubeChannelId, setYoutubeChannelId] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpYoutubeChannelId);
   const [postRegex, setPostRegex] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpPostRegex);
   const [postTemplate, setPostTemplate] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpPostTemplate);
+  const [pageTemplate, setPageTemplate] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(settings.options.yttpPageTemplate);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {}, []);
   function saveSettings() {
     const data = new FormData();
@@ -76,6 +77,7 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
     data.append('yttpYoutubeChannelId', youtubeChannelId);
     data.append('yttpPostRegex', postRegex);
     data.append('yttpPostTemplate', postTemplate);
+    data.append('yttpPageTemplate', pageTemplate);
     const paramsAsQueryString = new URLSearchParams(data);
     noticeOperations.removeAllNotices();
     noticeOperations.createNotice({
@@ -150,6 +152,17 @@ const YoutubeToPostAdminPageSettings = (0,_wordpress_components__WEBPACK_IMPORTE
       setPostTemplate(v);
     },
     placeholder: "<!-- wp:paragraph -->\r __GROUP[0]__\r <!-- /wp:paragraph -->\r <!-- wp:embed {\"url\":\"https://www.youtube.com/embed/__VIDEO_ID__\",\"type\":\"rich\",\"providerNameSlug\":\"embed-handler\",\"responsive\":true,\"className\":\"wp-embed-aspect-16-9 wp-has-aspect-ratio\"} -->\r <figure class=\"wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio\"><div class=\"wp-block-embed__wrapper\">\r https://www.youtube.com/embed/__VIDEO_ID__\r </div></figure>\r <!-- /wp:embed -->"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "components-base-control__label",
+    for: "pageTemplateInput"
+  }, "Page Template (optional)"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    id: "pageTemplateInput",
+    type: "text",
+    value: pageTemplate,
+    onChange: v => {
+      setPageTemplate(v);
+    },
+    placeholder: "page-template.php"
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://regex101.com/"
   }, "If you do not know how regex expressions work, give this a try: Regex101")))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -265,20 +278,22 @@ function YoutubeToPostAdminPageList(_ref) {
     className: "wp-list-table widefat fixed striped table-view-list yttp_videos"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
     className: "manage-column column-title"
-  }, "Title"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
+  }, "Video Title"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
     className: "manage-column column-id"
-  }, "Id"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
+  }, "Video Id"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
     className: "manage-column column-action column-primary"
   }, "Action")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, videos == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
-    colspan: "10"
+    colspan: "3"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null))), videos !== undefined && videos.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     colspan: "3"
   }, "0 results from youtube. Make sure you configured your Youtube-Channel-Id and your Youtube-Api-Key correctly under 'Settings'")), videos !== undefined && videos.length > 0 && videos.map(video => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.post_id ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: '/wp-admin/post.php?post=' + video.post_id + '&action=edit'
-  }, video.title) : video.title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.id), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.post_id ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, video.title) : video.title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.id ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: 'https://studio.youtube.com/video/' + video.id + '/edit'
+  }, video.id) : video.id), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, video.post_id ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     className: "button button-secondary",
     href: '/wp-admin/post.php?post=' + video.post_id + '&action=edit'
-  }, "Open Post") : video.loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }, "Edit Post") : video.loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "button button-primary",
     onClick: () => {
       createArticle(video.id);
@@ -431,7 +446,6 @@ window.onload = function () {
     settings: window.yttpData
   }), document.getElementById('yttpMain'));
 };
-console.log('React for  the win 2');
 })();
 
 /******/ })()

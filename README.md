@@ -78,14 +78,55 @@ You can also use blocks in the template, e.g. to add a gutenberg table or video 
 
 ```
 
+## Hooks
+
+There is one hook available namend *yttp_after_post_creation*, which is called "after" post and attachment creation. 
+It contains the success state, the post itself if created, the post_id and the attachment_id if set
+
+Example
+
+```
+
+add_action('yttp_after_post_creation', 'yttp_after_post_creation_func');
+
+    function yttp_after_post_creation_func($result) {
+        error_log('hook test');
+        error_log(print_r($result, true));
+    }
+
+    /*
+
+        result:
+
+            [03-Apr-2023 16:32:42 UTC] hook test
+            [03-Apr-2023 16:32:42 UTC] Array
+            (
+                [success] => 1
+                [post] => Array
+                    (
+                        [post_title] => This is a title
+                        [post_content] => This is a content
+                        [post_status] => draft
+                        [post_author] => 1
+                        [post_type] => post
+                        [page_template] => single-custom.php
+                    )
+
+                [post_id] => 232
+                [attachment_id] => 
+            )
+
+
+    */
+
+```
+
 ## Author
 
 Alexander Thurn
 
 ## TODO
 
-* Add support for page_templates, e.g. 'page_template' => 'template_file.php'
-* Add a hook after post-creation
 * Add Elementor-Support: https://stackoverflow.com/questions/63898766/wordpress-programmatically-insert-elementor-widgets-in-a-page
 
 ## License

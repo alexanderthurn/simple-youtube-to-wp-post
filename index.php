@@ -5,7 +5,7 @@
 	Author: chefmangoo (Alexander Thurn)
 	Version: 1.0.3
 	Requires at least: 5.5
-	Requires PHP: 7.4.30
+	Requires PHP: 7.4.3
 	License: MIT
 	License URI: https://opensource.org/licenses/MIT
 */
@@ -28,6 +28,7 @@ class YoutubeToPostPlugin {
 		add_option('yttpPostTemplate', '');
 		add_option('yttpPostRegex', '');
 		add_option('yttpYoutubeChannelId', '');
+		add_option('yttpPageTemplate', '');
 	}
 
 	function adminMenu(){
@@ -55,7 +56,7 @@ class YoutubeToPostPlugin {
 			'optionsUrl' => admin_url('options.php'),
 			'nonce' => wp_create_nonce('yttp-nonce'),
 			'route' => $_REQUEST['page'],
-			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'), 'yttpPostRegex' => stripslashes(get_option('yttpPostRegex')), 'yttpPostTemplate' => stripslashes(get_option('yttpPostTemplate')))
+			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'), 'yttpPostRegex' => stripslashes(get_option('yttpPostRegex')), 'yttpPostTemplate' => stripslashes(get_option('yttpPostTemplate')), 'yttpPageTemplate' => get_option('yttpPageTemplate'))
 		));
 	}
 

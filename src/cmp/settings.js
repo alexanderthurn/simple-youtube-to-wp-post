@@ -6,6 +6,7 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
   const [youtubeChannelId, setYoutubeChannelId] = useState(settings.options.yttpYoutubeChannelId)
   const [postRegex, setPostRegex] = useState(settings.options.yttpPostRegex)
   const [postTemplate, setPostTemplate] = useState(settings.options.yttpPostTemplate)
+  const [pageTemplate, setPageTemplate] = useState(settings.options.yttpPageTemplate)
 
   useEffect(() => {
     
@@ -20,6 +21,7 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
     data.append('yttpYoutubeChannelId', youtubeChannelId);
     data.append('yttpPostRegex', postRegex);
     data.append('yttpPostTemplate', postTemplate);
+    data.append('yttpPageTemplate', pageTemplate);
 
     const paramsAsQueryString = new URLSearchParams(data);
     noticeOperations.removeAllNotices()
@@ -140,6 +142,18 @@ const YoutubeToPostAdminPageSettings = withNotices( ({ noticeOperations, noticeU
                   https://www.youtube.com/embed/__VIDEO_ID__
                   </div></figure>
                   <!-- /wp:embed -->'
+                />
+
+
+                <label className="components-base-control__label" for="pageTemplateInput">Page Template (optional)</label><br />
+                <TextControl
+                id="pageTemplateInput"
+                  type='text'
+                  value={pageTemplate}
+                  onChange={(v) => {
+                    setPageTemplate(v);
+                  }}
+                  placeholder='page-template.php'
                 />
 
               </CardBody>

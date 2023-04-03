@@ -96,8 +96,8 @@ function YoutubeToPostAdminPageList({settings}) {
 
         <table className='wp-list-table widefat fixed striped table-view-list yttp_videos'>
           <thead>
-            <th className='manage-column column-title'>Title</th>
-            <th className='manage-column column-id'>Id</th>
+            <th className='manage-column column-title'>Video Title</th>
+            <th className='manage-column column-id'>Video Id</th>
             <th className='manage-column column-action column-primary'>
               Action
             </th>
@@ -105,7 +105,7 @@ function YoutubeToPostAdminPageList({settings}) {
           <tbody>
             {videos == undefined && (
               <tr>
-                <td colspan='10'>
+                <td colspan='3'>
                   <Spinner />
                 </td>
               </tr>
@@ -124,10 +124,11 @@ function YoutubeToPostAdminPageList({settings}) {
                   <td>
                   {video.post_id ? <a href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>{video.title}</a> : video.title}
                   </td>
-                  <td>{video.id}</td>
+                  <td>{video.id ? <a href={'https://studio.youtube.com/video/' + video.id + '/edit'}>{video.id}</a> : video.id}
+                  </td>
                   
                   <td>
-                     {video.post_id ? <a  className='button button-secondary' href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>Open Post</a> : 
+                     {video.post_id ? <a  className='button button-secondary' href={'/wp-admin/post.php?post=' + video.post_id + '&action=edit'}>Edit Post</a> : 
                      (video.loading ? <Spinner /> : <Button
                       className='button button-primary'
                       onClick={() => {

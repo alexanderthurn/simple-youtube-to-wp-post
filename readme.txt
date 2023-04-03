@@ -2,7 +2,7 @@
 Stable tag: 1.0.3
 Requires at least: 5.5
 Tested up to: 6.2
-Requires PHP: 7.4.30
+Requires PHP: 7.4.3
 Contributors: chefmangoo
 Tags: youtube, post, video, generation, automation, create
 License: MIT
@@ -37,6 +37,10 @@ Yes, you need an api key from Google Youtube API. It is free and can be created 
 
 The channel id is the id of your youtube channel. You can find it [here](https://www.youtube.com/account_advanced)
 
+= Can i extend the plugin =
+
+Yes. Two ways: a) Fork the github repository b) Use an action hook named "yttp_after_post_creation". It is called after the post and attachment was created and has one parameter $result. This $result contains the 'post', the 'post_id' and the 'attachment_id'. More information can be found on the github page of this plugin.
+
 
 == Screenshots ==
 
@@ -46,5 +50,10 @@ The channel id is the id of your youtube channel. You can find it [here](https:/
 
 == Changelog ==
 
-= 1.0.0 =
+
+= 1.1.0 =
+* Added support for page_template parameter for special posts
+* Added yttp_after_post_creation action hook
+
+= 1.0.3 =
 * First version

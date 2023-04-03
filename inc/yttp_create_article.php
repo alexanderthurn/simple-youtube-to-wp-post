@@ -14,8 +14,9 @@ function yttp_creatArticle() {
     $id = $_POST['id'];
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $thumbnail = $_POST['thumbnail'];
+    $thumbnail = 'abc';
 
+    $pageTemplate = get_option('yttpPageTemplate');
     $postRegex = stripslashes(get_option('yttpPostRegex'));
     $postTemplate = stripslashes(get_option('yttpPostTemplate'));
 
@@ -44,10 +45,32 @@ function yttp_creatArticle() {
     $post_id = wp_insert_post($new_post);
     add_post_meta($post_id, 'yytp_id', $id, false);
     
-    $attachment_id = rudr_upload_file_by_url($thumbnail, $post_id, $id);
-    set_post_thumbnail($post_id, $attachment_id);
+    if ($pageTemplate) {
+        $new_post['page_template'] = $pageTemplate;
+        update_post_meta($post_id, '_wp_page_template', $pageTemplate);
+    }
 
-    echo '{ "ok": "wg", "title" : "'. $title . '", "post_id" :"'.$post_id.'", "attachment_id" :"'.$attachment_id.'"}';
+    $attachment_id = null;
+    if ($thumbnail) {
+        $attachment_id = rudr_upload_file_by_url($thumbnail, $post_id, $id);
+        if ($attachment_id) {
+            set_post_thumbnail($post_id, $attachment_id); 
+        }
+    }
+
+    $result = array(
+        'success' => true,
+        'post' => $new_post,
+        'post_id' => $post_id,
+        'attachment_id' => $attachment_id
+    );
+
+    error_log('before_hook');
+    error_log(print_r($result, true));
+    
+    do_action('yttp_after_post_creation', $result);
+
+    echo json_encode($result);
     wp_die();
 }
 

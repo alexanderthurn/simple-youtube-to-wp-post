@@ -12,6 +12,7 @@ function yttp_options() {
 		update_option('yttpYoutubeChannelId', sanitize_text_field($_GET['yttpYoutubeChannelId']));
         update_option('yttpPostTemplate', $_GET['yttpPostTemplate']);
 		update_option('yttpPostRegex', $_GET['yttpPostRegex']);
+		update_option('yttpPageTemplate', $_GET['yttpPageTemplate']);
 	}
     
 	echo json_encode($result, JSON_PRETTY_PRINT);
