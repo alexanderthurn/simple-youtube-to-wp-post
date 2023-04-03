@@ -50,7 +50,6 @@ class YoutubeToPostPlugin {
 		wp_enqueue_script('yttp_scripts', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-components'), 1.0);
 		wp_enqueue_style('yttp_style', plugin_dir_url(__FILE__) . 'build/index.css', array(), '1.0');
 
-		error_log('js added');
 		wp_localize_script('yttp_scripts', 'yttpData', array(
 			'ajaxUrl' => admin_url('admin-ajax.php'),
 			'optionsUrl' => admin_url('options.php'),
