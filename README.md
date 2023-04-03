@@ -11,7 +11,7 @@ Do you create videos and create posts based on them? maybe with a very similar d
 
 * Simple one click creation of posts based on your youtube videos 
 * Regular expressions to use only some parts of the video description
-* Simple blog template in which you can define where the description of the video will be placed, gutenberg blocks are supported
+* Simple blog template in which you can define where the description of the video will be placed within the content of the post, gutenberg blocks are supported
 * Extendable via action hook after post + attachment creation
 
 ![Screenshot4](assets/screenshot-4.gif)
@@ -123,7 +123,7 @@ add_action('yttp_after_post_creation', 'yttp_after_post_creation_func');
                     )
 
                 [post_id] => 232
-                [attachment_id] => 
+                [attachment_id] => 233
             )
 
 
