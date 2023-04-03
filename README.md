@@ -14,6 +14,8 @@ Do you create videos and based on them you create posts? With a similar descript
 * Simple blog template in which you can define where the description of the video will be placed, gutenberg blocks are supported
 * Extendable via action hook after post + attachment creation
 
+![Screenshot4](assets/screenshot-4.gif)
+
 ## Getting started
 
 * Install this plugin, e.g. copy it in the plugins directory. 
