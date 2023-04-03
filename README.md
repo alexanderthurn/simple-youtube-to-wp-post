@@ -142,7 +142,7 @@ You can define which parts of the video description should be taken and how they
 
 ## Author
 
-Alexander Thurn
+[Alexander Thurn](https://github.com/alexanderthurn)
 
 ## TODO
 
