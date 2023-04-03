@@ -12,14 +12,14 @@ A plugin to create wordpress posts from youtube videos
 
 == Description ==
 
-You own a youtube channel <b>AND</b> a wordpress site?
-You want to create a video and afterwards a blog-post with the same description and a link to the video? 
-With this plugin you can create posts based on your youtube videos and modify them afterwards like usual
+Do you own a youtube channel <b>AND</b> a wordpress site?
+Do you create videos and create posts based on them? maybe with a very similar description and a link to the video? 
+**With this plugin you can create posts based on your youtube videos and modify them afterwards like usual**
 
 == Installation ==
 
 1. Navigate to the 'Add New' in the plugins dashboard
-2. Search for 'wp-youtube-to-post'
+2. Search for 'Simple Youtube To WP Post'
 3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 
@@ -39,8 +39,10 @@ The channel id is the id of your youtube channel. You can find it [here](https:/
 
 = Can i extend the plugin =
 
-Yes. Two ways: a) Fork the github repository b) Use an action hook named "yttp_after_post_creation". It is called after the post and attachment was created and has one parameter $result. This $result contains the 'post', the 'post_id' and the 'attachment_id'. More information can be found on the github page of this plugin.
+Yes. 
 
+a) Fork the github repository 
+b) Use an action hook named "yttp_after_post_creation". It is called after the post and attachment was created and has one parameter $result. This $result contains the 'post', the 'post_id' and the 'attachment_id'. More information can be found on the github page of this plugin.
 
 == Screenshots ==
 
