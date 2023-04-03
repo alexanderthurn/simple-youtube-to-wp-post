@@ -131,9 +131,14 @@ add_action('yttp_after_post_creation', 'yttp_after_post_creation_func');
 
 ## Screenshots
 
-![List of youtube videos. One click on "Create post" creates a post with the description of the video as the content of the blog post and the thumbnail of the video as the featured image](assets/screenshot-0.png)
-![This screenshot shows the mandatory settings (youtube channel-id and api key)](assets/screenshot-1.png)
-![You can define which parts of the video description should be taken and how they should be outputted](assets/screenshot-2.png)
+List of youtube videos. One click on "Create post" creates a post with the description of the video as the content of the blog post and the thumbnail of the video as the featured image
+![Screenshot1](assets/screenshot-0.png)
+
+This screenshot shows the mandatory settings (youtube channel-id and api key)
+![Screenshot2](assets/screenshot-1.png)
+
+You can define which parts of the video description should be taken and how they should be outputted
+![Screenshot3](assets/screenshot-2.png)
 
 ## Author
 
