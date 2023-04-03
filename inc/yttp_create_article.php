@@ -14,7 +14,7 @@ function yttp_creatArticle() {
     $id = $_POST['id'];
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $thumbnail = 'abc';
+    $thumbnail = $_POST['thumbnail'];
 
     $pageTemplate = get_option('yttpPageTemplate');
     $postRegex = stripslashes(get_option('yttpPostRegex'));
@@ -50,11 +50,12 @@ function yttp_creatArticle() {
         update_post_meta($post_id, '_wp_page_template', $pageTemplate);
     }
 
+
     $attachment_id = null;
     if ($thumbnail) {
         $attachment_id = rudr_upload_file_by_url($thumbnail, $post_id, $id);
         if ($attachment_id) {
-            set_post_thumbnail($post_id, $attachment_id); 
+            set_post_thumbnail($post_id, $attachment_id);   
         }
     }
 
@@ -65,8 +66,6 @@ function yttp_creatArticle() {
         'attachment_id' => $attachment_id
     );
 
-    error_log('before_hook');
-    error_log(print_r($result, true));
     
     do_action('yttp_after_post_creation', $result);
 
