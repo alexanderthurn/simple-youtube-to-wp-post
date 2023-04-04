@@ -13,6 +13,7 @@ Do you create videos and create posts based on them? maybe with a very similar d
 * Regular expressions to use only some parts of the video description
 * Simple blog template in which you can define where the description of the video will be placed within the content of the post, gutenberg blocks are supported
 * Extendable via action hook after post + attachment creation
+* Converts youtube text to html (newlines, links are created)
 
 ![Screenshot4](assets/screenshot-4.gif)
 
@@ -148,7 +149,6 @@ You can define which parts of the video description should be taken and how they
 
 ## TODO
 
-* Create html newlines and urls based on the youtube description
 * Add Elementor-Support: https://stackoverflow.com/questions/63898766/wordpress-programmatically-insert-elementor-widgets-in-a-page
 
 ## License

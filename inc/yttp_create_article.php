@@ -1,5 +1,17 @@
 <?php
 
+function yttp_text_to_html($text) {
+    return nl2br(yttp_hyperlinksAnchored($text));
+}
+
+/* 
+https://stackoverflow.com/questions/1959062/how-to-add-anchor-tag-to-a-url-from-text-input
+*/
+
+function yttp_hyperlinksAnchored($text) {
+    return preg_replace('@(http)?(s)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@', '<a target="ref" href="http$2://$4">$1$2$3$4</a>', $text);
+}
+
 function yttp_creatArticle() {
     
     $result = array(
@@ -27,9 +39,9 @@ function yttp_creatArticle() {
     $content = $postTemplate;
     @preg_match_all($postRegex, $description, $matches, PREG_SET_ORDER, 0);
     if ($matches && sizeof($matches) > 0) {
-        if (sizeof($matches[0]) > 1) $content = str_replace("__GROUP[0]__", $matches[0][1], $content);
-        if (sizeof($matches[0]) > 2) $content = str_replace("__GROUP[1]__", $matches[0][2], $content);
-        if (sizeof($matches[0]) > 3) $content = str_replace("__GROUP[2]__", $matches[0][3], $content);
+        if (sizeof($matches[0]) > 1) $content = str_replace("__GROUP[0]__", yttp_text_to_html($matches[0][1]), $content);
+        if (sizeof($matches[0]) > 2) $content = str_replace("__GROUP[1]__", yttp_text_to_html($matches[0][2]), $content);
+        if (sizeof($matches[0]) > 3) $content = str_replace("__GROUP[2]__", yttp_text_to_html($matches[0][3]), $content);
     } else {
         $content = str_replace("__GROUP[0]__", $description, $content);
     }
