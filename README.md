@@ -149,6 +149,7 @@ You can define which parts of the video description should be taken and how they
 
 ## TODO
 
+* Better link extraction (t.me does not work)
 * Add Elementor-Support: https://stackoverflow.com/questions/63898766/wordpress-programmatically-insert-elementor-widgets-in-a-page
 
 ## License
