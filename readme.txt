@@ -1,5 +1,5 @@
 === Simple Youtube To WP Post ===
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires at least: 5.5
 Tested up to: 6.2
 Requires PHP: 7.4.3
@@ -52,6 +52,8 @@ b) Use an action hook named "yttp_after_post_creation". It is called after the p
 
 == Changelog ==
 
+= 1.1.1 =
+* HTML-Anchor and <br> creation based on youtube text newlines and http(s) urls
 
 = 1.1.0 =
 * Added support for page_template parameter for special posts
