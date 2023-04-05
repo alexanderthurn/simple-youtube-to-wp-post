@@ -48,7 +48,7 @@ With post-settings you can define what part of the description will be taken and
 /(.*)Über die Werteherren/misu
 ```
 
-The content in the round brackets are saved as regex-groups. The first () will be made available as __GROUP[0]__, the second () will be __GROUP[1]__. Additionally there is the __VIDEO_ID__ field, which contains the id of the video, e.g. to create a link to the original video. 
+The contents in the round brackets are saved as regex-groups. The first () will be made available as __GROUP[0]__, the second () will be __GROUP[1]__. Additionally there is the __VIDEO_ID__ field, which contains the id of the video, e.g. to create a link to the original video. 
 
 Those fields can be used in a configurable inline-template, which takes those values and can contain html and gutenberg markup code.
 
@@ -74,10 +74,6 @@ You can also use blocks in the template, e.g. to add a gutenberg table or video 
     https://www.youtube.com/embed/__VIDEO_ID__
     </div></figure>
     <!-- /wp:embed -->
-
-    <!-- wp:table -->
-    <figure class="wp-block-table"><table><tbody><tr><td>1a</td><td>1b</td></tr><tr><td>2a</td><td>2b</td></tr></tbody></table><figcaption class="wp-element-caption">caption</figcaption></figure>
-    <!-- /wp:table -->
 
 ```
 

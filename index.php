@@ -2,10 +2,11 @@
 /*
 	Plugin Name: Simple Youtube To WP Post
 	Description: Create a post from a youtube video
-	Author: chefmangoo (Alexander Thurn)
-	Version: 1.1.1
+	Author: chefmangoo
+	Author URI: https://profiles.wordpress.org/chefmangoo/
+	Version: 1.1.2
 	Requires at least: 5.5
-	Requires PHP: 7.4.3
+	Requires PHP: 7.4.0
 	License: MIT
 	License URI: https://opensource.org/licenses/MIT
 */

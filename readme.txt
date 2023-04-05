@@ -1,5 +1,5 @@
 === Simple Youtube To WP Post ===
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 Requires at least: 5.5
 Tested up to: 6.2
 Requires PHP: 7.4.3
