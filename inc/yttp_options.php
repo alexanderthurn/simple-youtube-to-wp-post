@@ -15,7 +15,7 @@ function yttp_options() {
 		update_option('yttpPageTemplate', sanitize_file_name($_GET['yttpPageTemplate']));
 	}
     
-	echo json_encode($result, JSON_PRETTY_PRINT);
+	echo wp_json_encode($result, JSON_PRETTY_PRINT);
 	wp_die();
 }
 

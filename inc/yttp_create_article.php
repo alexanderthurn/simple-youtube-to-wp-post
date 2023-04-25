@@ -41,7 +41,7 @@ function yttp_creatArticle() {
 
     if ( ! wp_verify_nonce( $_POST['nonce'], 'yttp-nonce' ) ) {
         $result['error'] = 'internal error';
-        echo json_encode($result);      
+        echo wp_json_encode($result);      
         die;
     }
     
@@ -82,7 +82,7 @@ function yttp_creatArticle() {
 
     if( is_wp_error( $post_id ) ) {
         $result['error'] = 'unable to create post';
-        echo json_encode($result);      
+        echo wp_json_encode($result);      
         die;
     }
 
@@ -106,7 +106,7 @@ function yttp_creatArticle() {
 
     do_action('yttp_after_post_creation', $result);
 
-    echo json_encode($result);
+    echo wp_json_encode($result);
     wp_die();
 }
 

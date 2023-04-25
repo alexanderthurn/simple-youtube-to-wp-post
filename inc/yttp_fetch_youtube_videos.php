@@ -86,7 +86,7 @@ function yttp_fetchYoutubeVideos() {
 	}
 
 	$result = yttp_enrichResultWithExistingPosts($result);
-	echo json_encode($result, JSON_PRETTY_PRINT);
+	echo wp_json_encode($result, JSON_PRETTY_PRINT);
 	wp_die();
 }
 

@@ -61,7 +61,11 @@ class YTTP_YoutubeToPostPlugin {
 	}
 
 	function getHTMLMain(){
-		echo '<div id="yttpMain"></div>';
+		echo wp_kses('<div id="yttpMain"></div>', array(
+			'div'      => array(
+				'id'  => array(),
+			),
+		));
 	}
 }
 
