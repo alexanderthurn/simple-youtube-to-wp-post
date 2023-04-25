@@ -80,7 +80,7 @@ function yttp_fetchYoutubeVideos() {
 			$thumbnail = $item["snippet"]["thumbnails"]["maxres"]["url"];
 		}
 
-		$entry = array("id" => esc_html($id), "title" => esc_html($title), "description" => esc_html($description), "thumbnail" => esc_url($thumbnail), "raw" => $item);
+		$entry = array("id" => esc_html($id), "title" => esc_html($title), "description" => esc_html($description), "thumbnail" => esc_url($thumbnail));
 
 		array_push($result["videos"], $entry);
 	}

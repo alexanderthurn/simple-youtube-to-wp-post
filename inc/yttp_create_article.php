@@ -50,7 +50,7 @@ function yttp_creatArticle() {
     $description = sanitize_textarea_field($_POST['description']);
     $thumbnail = sanitize_url($_POST['thumbnail']);
 
-    $pageTemplate = get_option('yttpPageTemplate');
+    $pageTemplate = sanitize_file_name(get_option('yttpPageTemplate'));
     $postRegex = html_entity_decode(stripslashes(get_option('yttpPostRegex')), ENT_COMPAT, "UTF-8");
     $postTemplate = html_entity_decode(stripslashes(get_option('yttpPostTemplate')), ENT_COMPAT, "UTF-8");
 
@@ -70,7 +70,7 @@ function yttp_creatArticle() {
 
 
     $new_post = array(
-        'post_title'   => esc_html($title),
+        'post_title'   => sanitize_text_field($title),
         'post_content' => wp_kses_post($content),
         'post_status'  => 'draft',
         'post_author'  => get_current_user_id(),
