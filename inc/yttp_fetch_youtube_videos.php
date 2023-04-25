@@ -61,9 +61,11 @@ function yttp_fetchYoutubeVideos() {
 		$url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id={$VIDEO_ID}&key={$YOUR_API_KEY}";
 	}
 
-    $content = file_get_contents($url);
+	$response = wp_remote_get($url);
+    $responseBody = wp_remote_retrieve_body( $response );
+    $data = json_decode( $responseBody, true );
 	$result = array( "videos" => array(), "url" => $url, "VIDEO_ID" => $VIDEO_ID);
-	$data = json_decode($content, true);
+	
 	
 	foreach ($data["items"] as $item) {
 		$id = "";
@@ -73,7 +75,6 @@ function yttp_fetchYoutubeVideos() {
 			$id = $item["id"]["videoId"];
 		}
 		
-
 		$title = $item["snippet"]["title"];
 		$description = $item["snippet"]["description"];
 		$thumbnail = $item["snippet"]["thumbnails"]["default"]["url"];
@@ -82,21 +83,6 @@ function yttp_fetchYoutubeVideos() {
 		}
 		$entry = array("id" => $id, "title" => $title, "description" => $description, "thumbnail" => $thumbnail, "raw" => $item);
 
-		if ($VIDEO_ID) {
-			if ($id !== $VIDEO_ID) {
-				continue;
-			} else {
-				$imageFilenameLocal = $id . '_' . basename($thumbnail);
-				$image = file_get_contents($thumbnail);
-				file_put_contents($imageFilenameLocal, $image);
-				$entry["filenameLocal"] = $imageFilenameLocal;
-				unlink($imageFilenameLocal);
-			}
-
-		} 
-
-		
-		
 		array_push($result["videos"], $entry);
 	}
 
