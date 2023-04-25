@@ -55,8 +55,8 @@ class YTTP_YoutubeToPostPlugin {
 			'ajaxUrl' => admin_url('admin-ajax.php'),
 			'optionsUrl' => admin_url('options.php'),
 			'nonce' => wp_create_nonce('yttp-nonce'),
-			'route' => $_REQUEST['page'],
-			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'), 'yttpPostRegex' => stripslashes(get_option('yttpPostRegex')), 'yttpPostTemplate' => stripslashes(get_option('yttpPostTemplate')), 'yttpPageTemplate' => get_option('yttpPageTemplate'))
+			'route' => sanitize_key($_REQUEST['page']),
+			'options' => array('yttpYoutubeApiKey' => get_option('yttpYoutubeApiKey'), 'yttpYoutubeChannelId' => get_option('yttpYoutubeChannelId'), 'yttpPostRegex' => html_entity_decode(stripslashes(get_option('yttpPostRegex')), ENT_COMPAT, "UTF-8"), 'yttpPostTemplate' => html_entity_decode(stripslashes(get_option('yttpPostTemplate')), ENT_COMPAT, "UTF-8"), 'yttpPageTemplate' => get_option('yttpPageTemplate'))
 		));
 	}
 
@@ -65,7 +65,7 @@ class YTTP_YoutubeToPostPlugin {
 	}
 }
 
-$youtubeToPostPlugin = new YTTP_YoutubeToPostPlugin();
+$yttp_youtubeToPostPlugin = new YTTP_YoutubeToPostPlugin();
 
 
 ?>

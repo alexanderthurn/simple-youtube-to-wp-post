@@ -42,31 +42,29 @@ function yttp_enrichResultWithExistingPosts($result) {
 }
 
 function yttp_fetchYoutubeVideos() {
-	$YOUR_API_KEY = get_option('yttpYoutubeApiKey');
-	$CHANNEL_ID = get_option('yttpYoutubeChannelId');
+	$YOUR_API_KEY = wp_specialchars_decode(wp_strip_all_tags(get_option('yttpYoutubeApiKey')));
+	$CHANNEL_ID = wp_specialchars_decode(wp_strip_all_tags(get_option('yttpYoutubeChannelId')));
 	$VIDEO_ID = null;
 
 	if ( ! wp_verify_nonce( $_POST['nonce'], 'yttp-nonce' ) ) {
         die ( 'Busted!');
     }
 
-
 	if (isset($_GET['VIDEO_ID'])) {
-		$VIDEO_ID = $_GET['VIDEO_ID'];
+		$VIDEO_ID = wp_specialchars_decode(wp_strip_all_tags($_GET['VIDEO_ID']));
 	}
 
-	$url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId={$CHANNEL_ID}&maxResults=5&order=date&key={$YOUR_API_KEY}";
+	$url = sanitize_url("https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId={$CHANNEL_ID}&maxResults=5&order=date&key={$YOUR_API_KEY}");
 
 	if ($VIDEO_ID) {
-		$url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id={$VIDEO_ID}&key={$YOUR_API_KEY}";
+		$url = sanitize_url("https://www.googleapis.com/youtube/v3/videos?part=snippet&id={$VIDEO_ID}&key={$YOUR_API_KEY}");
 	}
-
-	$response = wp_remote_get($url);
+	 
+	$response = wp_remote_get( $url);
     $responseBody = wp_remote_retrieve_body( $response );
     $data = json_decode( $responseBody, true );
-	$result = array( "videos" => array(), "url" => $url, "VIDEO_ID" => $VIDEO_ID);
-	
-	
+	$result = array( "videos" => array(), "url" => $url, "VIDEO_ID" => esc_html($VIDEO_ID));
+
 	foreach ($data["items"] as $item) {
 		$id = "";
 		if ($VIDEO_ID) {
@@ -81,7 +79,8 @@ function yttp_fetchYoutubeVideos() {
 		if (isset($item["snippet"]["thumbnails"]["maxres"])) {
 			$thumbnail = $item["snippet"]["thumbnails"]["maxres"]["url"];
 		}
-		$entry = array("id" => $id, "title" => $title, "description" => $description, "thumbnail" => $thumbnail, "raw" => $item);
+
+		$entry = array("id" => esc_html($id), "title" => esc_html($title), "description" => esc_html($description), "thumbnail" => esc_url($thumbnail), "raw" => $item);
 
 		array_push($result["videos"], $entry);
 	}

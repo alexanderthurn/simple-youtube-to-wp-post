@@ -1,7 +1,16 @@
 <?php
 
 function yttp_text_to_html($text) {
-    return nl2br(yttp_hyperlinksAnchored($text));
+    $htmlContent = nl2br(yttp_italic(yttp_strikethrough(yttp_bold(yttp_hyperlinksAnchored($text)))));
+    return wp_kses($htmlContent, array(
+        'a'      => array(
+            'href'  => array(),
+            'title' => array(),
+        ),
+        'br'     => array(),
+        'i'     => array(),
+        's' => array(),
+    ));
 }
 
 /* 
@@ -10,6 +19,18 @@ https://stackoverflow.com/questions/1959062/how-to-add-anchor-tag-to-a-url-from-
 
 function yttp_hyperlinksAnchored($text) {
     return preg_replace('@(http)?(s)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@', '<a target="ref" href="http$2://$4">$1$2$3$4</a>', $text);
+}
+
+function yttp_bold($text) {
+    return preg_replace('@\*(\w*)\*(\s)@', '<b>$1</b>$2', $text);
+}
+
+function yttp_strikethrough($text) {
+    return preg_replace('@\-(\w*)\-(\s)@', '<s>$1</s>$2', $text);
+}
+
+function yttp_italic($text) {
+    return preg_replace('@\_(\w*)\_(\s)@', '<i>$1</i>$2', $text);
 }
 
 function yttp_creatArticle() {
@@ -24,14 +45,14 @@ function yttp_creatArticle() {
         die;
     }
     
-    $id = $_POST['id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $thumbnail = $_POST['thumbnail'];
+    $id = sanitize_text_field($_POST['id']);
+    $title = sanitize_text_field($_POST['title']);
+    $description = sanitize_textarea_field($_POST['description']);
+    $thumbnail = sanitize_url($_POST['thumbnail']);
 
     $pageTemplate = get_option('yttpPageTemplate');
-    $postRegex = stripslashes(get_option('yttpPostRegex'));
-    $postTemplate = stripslashes(get_option('yttpPostTemplate'));
+    $postRegex = html_entity_decode(stripslashes(get_option('yttpPostRegex')), ENT_COMPAT, "UTF-8");
+    $postTemplate = html_entity_decode(stripslashes(get_option('yttpPostTemplate')), ENT_COMPAT, "UTF-8");
 
     if (!$postRegex) $postRegex = '/(.*)/misu';
     if (!$postTemplate) $postTemplate = '__GROUP[0]__';
@@ -47,9 +68,10 @@ function yttp_creatArticle() {
     }
     $content = str_replace("__VIDEO_ID__", $id, $content);
 
+
     $new_post = array(
-        'post_title'   => $title,
-        'post_content' => $content,
+        'post_title'   => esc_html($title),
+        'post_content' => wp_kses_post($content),
         'post_status'  => 'draft',
         'post_author'  => get_current_user_id(),
         'post_type'    => 'post'

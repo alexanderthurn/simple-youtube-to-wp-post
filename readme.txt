@@ -53,7 +53,10 @@ b) Use an action hook named "yttp_after_post_creation". It is called after the p
 == Changelog ==
 
 = 1.1.2 =
-* Prefix yttp_ for all functions to prevent name clashes
+* Feature: Support for youtube description elements. * bold, - strike through, _ italic
+* Prefix yttp_ for all functions and global variables to prevent name clashes
+* wp_remote_get instead of file_get_contents for stability
+* Field sanitizations to prevent malicious inputs
 
 = 1.1.1 =
 * HTML-Anchor and <br> creation based on youtube text newlines and http(s) urls
