@@ -68,16 +68,16 @@ function yttp_fetchYoutubeVideos() {
 	foreach ($data["items"] as $item) {
 		$id = "";
 		if ($VIDEO_ID) {
-			$id = $item["id"];
+			$id = sanitize_text_field($item["id"]);
 		} else {
-			$id = $item["id"]["videoId"];
+			$id = sanitize_text_field($item["id"]["videoId"]);
 		}
 		
-		$title = $item["snippet"]["title"];
-		$description = $item["snippet"]["description"];
-		$thumbnail = $item["snippet"]["thumbnails"]["default"]["url"];
+		$title = sanitize_text_field($item["snippet"]["title"]);
+		$description = sanitize_textarea_field($item["snippet"]["description"]);
+		$thumbnail = sanitize_url($item["snippet"]["thumbnails"]["default"]["url"]);
 		if (isset($item["snippet"]["thumbnails"]["maxres"])) {
-			$thumbnail = $item["snippet"]["thumbnails"]["maxres"]["url"];
+			$thumbnail = sanitize_url($item["snippet"]["thumbnails"]["maxres"]["url"]);
 		}
 
 		$entry = array("id" => esc_html($id), "title" => esc_html($title), "description" => esc_html($description), "thumbnail" => esc_url($thumbnail));
