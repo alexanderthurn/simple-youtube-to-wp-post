@@ -19,7 +19,7 @@ require_once plugin_dir_path(__FILE__) . 'inc/yttp_fetch_youtube_videos.php';
 require_once plugin_dir_path(__FILE__) . 'inc/yttp_options.php';
 
 
-class YoutubeToPostPlugin {
+class YTTP_YoutubeToPostPlugin {
 	function __construct() {
 		add_action('admin_menu', array($this, 'adminMenu'));
 		add_action('wp_ajax_yttp_creatArticle', 'yttp_creatArticle' );
@@ -65,7 +65,7 @@ class YoutubeToPostPlugin {
 	}
 }
 
-$youtubeToPostPlugin = new YoutubeToPostPlugin();
+$youtubeToPostPlugin = new YTTP_YoutubeToPostPlugin();
 
 
 ?>

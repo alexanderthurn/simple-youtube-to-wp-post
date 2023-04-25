@@ -52,6 +52,9 @@ b) Use an action hook named "yttp_after_post_creation". It is called after the p
 
 == Changelog ==
 
+= 1.1.2 =
+* Prefix yttp_ for all functions to prevent name clashes
+
 = 1.1.1 =
 * HTML-Anchor and <br> creation based on youtube text newlines and http(s) urls
 

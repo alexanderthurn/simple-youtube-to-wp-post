@@ -6,7 +6,7 @@
  * @author Misha Rudrastyh
  * @link https://rudrastyh.com/wordpress/how-to-add-images-to-media-library-from-uploaded-files-programmatically.html#upload-image-from-url
  */
-function rudr_upload_file_by_url( $image_url, $post_id, $video_id ) {
+function yttp_rudr_upload_file_by_url( $image_url, $post_id, $video_id ) {
 
 	// it allows us to use download_url() and wp_handle_sideload() functions
 	require_once( ABSPATH . 'wp-admin/includes/file.php' );

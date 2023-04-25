@@ -73,7 +73,7 @@ function yttp_creatArticle() {
 
     $attachment_id = null;
     if ($thumbnail) {
-        $attachment_id = rudr_upload_file_by_url($thumbnail, $post_id, $id);
+        $attachment_id = yttp_rudr_upload_file_by_url($thumbnail, $post_id, $id);
         if ($attachment_id) {
             set_post_thumbnail($post_id, $attachment_id);   
         }
